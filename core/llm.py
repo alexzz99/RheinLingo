@@ -12,6 +12,10 @@ from abc import ABC, abstractmethod
 from core import config
 
 
+# Délai maximal d'attente d'une réponse : sans lui, l'UI reste bloquée sur « L'IA réfléchit… ».
+DELAI_SECONDES = 45
+
+
 class LLMError(Exception):
     """Erreur générique du fournisseur LLM (message lisible par l'utilisateur)."""
 
@@ -40,7 +44,10 @@ class GeminiLLM(FournisseurLLM):
         from google.genai import errors, types
 
         try:
-            client = genai.Client(api_key=self.cle_api)
+            client = genai.Client(
+                api_key=self.cle_api,
+                http_options=types.HttpOptions(timeout=DELAI_SECONDES * 1000),  # en ms
+            )
             reponse = client.models.generate_content(
                 model=self.modele,
                 contents=prompt,
@@ -54,6 +61,11 @@ class GeminiLLM(FournisseurLLM):
                     "ou passe sur Claude (LLM_PROVIDER=claude)."
                 ) from e
             raise LLMError(f"Erreur Gemini ({getattr(e, 'code', '?')}) : {e}") from e
+        except Exception as e:  # délai dépassé, réseau coupé...
+            raise LLMError(
+                f"Gemini ne répond pas (délai de {DELAI_SECONDES} s dépassé ou réseau coupé). "
+                f"Vérifie le nom du modèle (LLM_MODEL) et ta connexion. Détail : {e}"
+            ) from e
 
 
 class ClaudeLLM(FournisseurLLM):
@@ -64,7 +76,7 @@ class ClaudeLLM(FournisseurLLM):
 
         options = {"system": systeme} if systeme else {}
         try:
-            client = anthropic.Anthropic(api_key=self.cle_api)
+            client = anthropic.Anthropic(api_key=self.cle_api, timeout=DELAI_SECONDES)
             reponse = client.messages.create(
                 model=self.modele,
                 max_tokens=1024,

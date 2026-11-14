@@ -32,13 +32,13 @@ def configurer_page(titre: str, icone: str = "🇩🇪") -> None:
 
 def barre_navigation() -> None:
     """Navigation en haut de page (évite d'ouvrir le menu burger sur mobile)."""
-    colonnes = st.columns(3)
-    with colonnes[0]:
-        st.page_link("app.py", label="Accueil", icon="🏠")
-    with colonnes[1]:
-        st.page_link("pages/1_Ajouter_un_mot.py", label="Ajouter", icon="➕")
-    with colonnes[2]:
-        st.page_link("pages/2_Mon_vocabulaire.py", label="Mots", icon="📚")
+    with st.popover("☰ Menu", use_container_width=True):
+        st.page_link("app.py", label="Accueil", icon="🏠", use_container_width=True)
+        st.page_link("pages/3_Reviser.py", label="Réviser", icon="🧠", use_container_width=True)
+        st.page_link("pages/1_Ajouter_un_mot.py", label="Ajouter un mot", icon="➕",
+                     use_container_width=True)
+        st.page_link("pages/2_Mon_vocabulaire.py", label="Mon vocabulaire", icon="📚",
+                     use_container_width=True)
 
 
 def afficher_erreur(e: Exception) -> None:

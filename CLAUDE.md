@@ -6,7 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 RheinLingo : app personnelle d'apprentissage de l'allemand (B1→B2), Streamlit + Supabase (PostgreSQL) + LLM (Gemini par défaut, Claude en alternative). Code, commentaires, docstrings, UI et README sont **en français** ; garder cette convention. L'UI est pensée mobile (iPhone 11) : une colonne, boutons pleine largeur, pas de gros tableaux.
 
-Étape 1 (socle) terminée. Restent à faire, sans y toucher sans demande : répétition espacée SM-2 (`services/revision.py`), exercices générés, conversation, tableau de bord. Les tables `revisions` et `erreurs` existent déjà dans la migration.
+Étapes 1 (socle) et 2 (répétition espacée SM-2, `services/revision.py` + `pages/3_Reviser.py`) terminées. Restent à faire, une étape à la fois et seulement sur demande : exercices générés, conversation, tableau de bord. Le vocabulaire du domaine est dans `GLOSSARY.md`.
+
+Révision : FR→DE uniquement. `revisions` est un journal (l'état d'un mot = sa dernière ligne, un mot sans ligne = nouveau). Jour calculé à Berlin (`revision.aujourdhui()`), jamais avec `current_date` côté base. Seule la première note d'un mot par session est enregistrée.
 
 ## Commandes
 

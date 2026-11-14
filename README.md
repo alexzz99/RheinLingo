@@ -9,8 +9,13 @@ Pensée pour un usage sur smartphone (iPhone) : interface en une colonne, gros b
 - Liste du vocabulaire filtrable par thème et source, avec modification et suppression
 - Couche LLM interchangeable : Gemini (gratuit) ou Claude
 
-**Étapes à venir** : répétition espacée (SM-2), exercices générés, conversation, tableau de bord.
-Les tables `revisions` et `erreurs` sont déjà créées pour les accueillir.
+**Étape 2 : répétition espacée (SM-2)**
+- Page « Réviser » : face avant = mot français + thème, face arrière = article + mot allemand + phrase d'exemple
+- Bouton « Indice » : la phrase d'exemple avec un blanc à la place du mot (la note « Facile » est alors indisponible)
+- Auto-évaluation en 4 notes ; jusqu'à 10 mots nouveaux par jour ; le jour change à minuit heure de Berlin
+
+**Étapes à venir** : exercices générés, conversation, tableau de bord.
+La table `erreurs` est déjà créée pour les accueillir. Les termes du domaine sont dans [GLOSSARY.md](GLOSSARY.md).
 
 ## Structure
 

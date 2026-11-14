@@ -21,10 +21,11 @@ try:
 except Exception as e:
     ui.afficher_erreur(e)
 
+st.page_link("pages/3_Reviser.py", label="Réviser", icon="🧠", use_container_width=True)
 st.page_link("pages/1_Ajouter_un_mot.py", label="Ajouter un mot", icon="➕", use_container_width=True)
 st.page_link("pages/2_Mon_vocabulaire.py", label="Mon vocabulaire", icon="📚", use_container_width=True)
 
-# Étapes suivantes (non développées) : révision espacée, exercices, conversation, tableau de bord.
+# Étapes suivantes (non développées) : exercices, conversation, tableau de bord.
 
 st.divider()
 if st.button("Se déconnecter", use_container_width=True):
